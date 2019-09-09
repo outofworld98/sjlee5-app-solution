@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,18 +16,18 @@ public class BookController
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Book> find(@PathVariable Long id){
+    public ResponseEntity<Object> find(@PathVariable Long id){
         Optional<Book> book = bookRepository.findById(id);
-        if (book != null) {
-            return new ResponseEntity(book, HttpStatus.OK);
+        if (book.isPresent()) {
+            return new ResponseEntity<Object>(book, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> list() {
-        return new ResponseEntity(bookRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Book>> list() {
+        return new ResponseEntity<>(bookRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -36,12 +35,6 @@ public class BookController
         bookRepository.save(book);
         return new ResponseEntity<>(book, HttpStatus.CREATED);
     }
-
-//    @PostMapping
-//    public String save(@RequestBody Book book){
-//        bookRepository.save(book);
-//        return "Book "+book+" added";
-//    }
 
     @ResponseBody
     @PutMapping("{id}")

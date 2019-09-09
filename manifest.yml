@@ -1,0 +1,7 @@
+---
+applications:
+  - name: demo
+    path: build/libs/demo-0.0.1-SNAPSHOT.jar
+    random-route: true
+    env:
+      WELCOME_MESSAGE: Hello from Cloud Foundry SJLEE5
