@@ -34,6 +34,7 @@ public class BookController
     public ResponseEntity<Book> save(@RequestBody Book book){
         bookRepository.save(book);
         return new ResponseEntity<>(book, HttpStatus.CREATED);
+
     }
 
     @ResponseBody
@@ -44,7 +45,6 @@ public class BookController
             bookEntity.setAuthor(book.getAuthor());
             bookEntity.setPrice(book.getPrice());
             bookEntity.setTitle(book.getTitle());
-
             Book updatedBook = bookRepository.save(bookEntity);
             return new ResponseEntity<>(bookEntity, HttpStatus.OK);
         }else {
