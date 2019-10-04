@@ -41,6 +41,7 @@ public class BookController
     @PutMapping("{id}")
     public ResponseEntity<Book> update(@PathVariable Long id, @RequestBody Book book) {
         Book bookEntity = bookRepository.findById(id).get();
+        
         if (book != null) {
             bookEntity.setAuthor(book.getAuthor());
             bookEntity.setPrice(book.getPrice());
