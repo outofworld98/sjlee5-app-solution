@@ -17,6 +17,9 @@ public class BookController
 
     @GetMapping("{id}")
     public ResponseEntity<Object> find(@PathVariable Long id){
+
+
+
         Optional<Book> book = bookRepository.findById(id);
         if (book.isPresent()) {
             return new ResponseEntity<Object>(book, HttpStatus.OK);
@@ -32,6 +35,7 @@ public class BookController
 
     @PostMapping
     public ResponseEntity<Book> save(@RequestBody Book book){
+
         bookRepository.save(book);
         return new ResponseEntity<>(book, HttpStatus.CREATED);
 
